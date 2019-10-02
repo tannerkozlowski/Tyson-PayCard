@@ -1,0 +1,20 @@
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
+
+.info-modal {
+  &__content {
+    @include flexCol;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__label {
+    padding: 50px 0 60px 0;
+    text-align: center;
+  }
+
+  &__button {
+    width: 100px;
+    border-radius: 20px !important;
+  }
+}

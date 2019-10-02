@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind:  Deployment
+metadata:
+   name: fsv-paycardassignment
+   labels:
+     app: fsv-paycardassignment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fsv-paycardassignment
+  template:
+    metadata:
+      labels:
+        app: fsv-paycardassignment
+    spec:
+      containers:
+      - name: fsv-paycardassignment
+        image: '2160fsvpaycardassignment-docker-dev-local.artifactory.tyson.com:IMAGE_TAG'
+        ports:
+          - name: http-service
+            containerPort: 3001
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1024Mi
+          requests:
+            cpu: 250m
+            memory: 512Mi
+      imagePullSecrets:
+      - name: docker-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fsv-paycardassignment
+  namespace: 2160-paycard-assignment-app
+spec:
+  ports:
+  - port: 80
+    targetPort: 3001
+    protocol: TCP
+    name: http
+  selector:
+    app: fsv-paycardassignment          
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: fsv-paycardassignment
+  namespace: 2160-paycard-assignment-app
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/inbound-cidrs: 10.0.0.0/8,172.16.0.0/12,192.168.0.0/16
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:695629982901:certificate/1712caea-03e8-4ac5-87dd-1676ff825c08
+    alb.ingress.kubernetes.io/target-type: ip
+spec:
+  backend:
+    serviceName: fsv-paycardassignment
+    servicePort: 80
+  tls:
+  - hosts:
+    - paycard-dev.cloud.tyson.com
+--- 
+      

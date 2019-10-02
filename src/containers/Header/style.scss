@@ -1,0 +1,23 @@
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
+
+.main-header {
+  height: 30px;
+  padding-bottom: 80px;
+
+  &__wrapper {
+    @include flexRow;
+    justify-content: space-between;
+  }
+
+  &__image {
+    max-width: 150px;
+    height: auto;
+    padding: 20px;
+  }
+
+  &__button {
+    color: $color-white !important;
+    width: 100px;
+  }
+}

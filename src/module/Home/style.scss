@@ -1,0 +1,60 @@
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
+
+.home-paycardbox {
+  margin: 40px auto 0;
+  padding: 20px 30px 50px;
+  width: 530px;
+  background: $color-white;
+  @include lightShadow;
+
+  &__title {
+    font-size: 30px;
+    font-weight: bold;
+    color: $color-grey;
+  }
+
+  &__bottom {
+    @include flexRow;
+    justify-content: center;
+    padding-top: 10px;
+  }
+
+  &__button {
+    color: $color-blue;
+    font-weight: bold;
+    outline: none;
+    margin-right: 20px;
+  }
+
+  &__searchbox {
+    @include flexRow;
+    padding-left: 38px;
+
+    &-label {
+      flex: 1;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 0;
+      padding-right: 16px;
+      white-space: nowrap;
+    }
+
+    &-input {
+      width: 130px;
+      font-size: 14px;
+    }
+
+    &-button {
+      width: 27px;
+      height: 27px;
+      background-color: #2699fb !important;
+      background-size: 16px;
+      background-repeat: no-repeat;
+      background-position: center;
+      outline: none;
+      border: none !important;
+      border-radius: 0 !important;
+    }
+  }
+}
